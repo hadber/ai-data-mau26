@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{blindtext}
+\usepackage{titlesec}
+\usepackage{graphicx}
+%\usepackage{underscore}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{pdfpages}
+\usepackage{setspace}
+
+\bibliographystyle{plain} 
+
+\title{Crowd Counting on Edge Devices}
+
+\author{Adrian Jon Berlovan\and Athanasios Smilkos \and Vrysiida Charizi}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\clearpage
+
+\section{Introduction}
+
+In the current day and age, we see the right to privacy being disregarded more and more often. In our project, we aim to help people regain that right. We will be investigating running crowd detection machine learning (ML) algorithms directly on edge devices. To the best of our knowledge, this subject has not been tackled that often in the literature, or has used some form of hybrid edge, server, and federated learning \cite{UAV}.
+
+\section{Application area}
+
+Our main concern relates to counting crowds in a privacy preserving way. As a project example, we can use Skånetrafiken ticket control. Instead of having controllers blindly board buses and bother people, we propose the use of an edge camera that can gather crowd statistics offline. By comparing that with the amount of scanned tickets, we can infer which lines are more prone to fraud. In this way, problematic lines can be isolated and investigated further by controllers.
+
+To that end, we will compare the performance of different edge devices (Raspberry Pis, Laptops, and other similarly weak hardware) in running different state of the art architectures \cite{RepSFNet} \cite{santos2025wireless} \cite{oneshot}. In order to run the models, we will attempt to minimize the neural networks, by employing various techniques such as pruning, quantization or knowledge distillation.
+
+\section{Data}
+
+For our benchmarks, we will be evaluating and comparing different datasets, and finally choose one of them \cite{CrowdHuman} \cite{COCO} \cite{KITTI}. Since we are interested in a smaller crowd of people (between 5-20), we will have to analyze the dataset and extract only the samples that fit our criteria. With that, we will explore retraining the existing models on our new data.
+
+\section{Results}
+
+To evaluate whether the algorithm is applicable on the tested platform, we will be conducting a series of experiments:
+\begin{itemize}
+\item Timing - will it run in a reasonable amount of time?
+\item Scale - can it fit on the device?
+\item Accuracy - does it count the number of people correctly?
+\end{itemize}
+
+After running the tests and collecting the necessary results, we will compile it all in graph form, for easier visualization. 
+
+\bibliography{bibliography}
+
+\end{document}
