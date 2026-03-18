@@ -1,3 +1,5 @@
+# code adapted from https://dipankarmedh1.medium.com/real-time-object-detection-with-yolo-and-webcam-enhancing-your-computer-vision-skills-861b97c78993
+
 import math
 
 import cv2

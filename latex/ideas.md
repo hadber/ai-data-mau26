@@ -17,3 +17,4 @@ We want to test it on our own data, so we will re-train it slightly with specifi
 1. How to re-train using only one label (in our case persons): https://github.com/ultralytics/ultralytics/issues/13534
 2. Quantization how-to (using some Microsoft bullshit, onnx): https://medium.com/@sulavstha007/quantizing-yolo-v8-models-34c39a2c10e2
 3. Visualizing the neural network: https://netron.app/
+4. Training parameters: https://docs.ultralytics.com/modes/train/
