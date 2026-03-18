@@ -1,2 +1,94 @@
 ﻿\clearpage
 \onecolumn
+
+\section{Appendix}\label{appendix:benchmark}
+
+\begin{table}[h] %\centering
+	\begin{tabular}{clccccc}
+		\toprule
+		\# & Format & Status & Size (MB) & mAP50-95(B) & Inference (ms/im) & FPS \\
+		\midrule
+		1  & PyTorch               & $\checkmark$ & 5.1  & 0.078  & 171.39 & 5.83 \\
+		2  & TorchScript           & $\checkmark$ & 9.7  & 0.0749 & 284.01 & 3.52 \\
+		3  & ONNX                  & $\checkmark$ & 9.4  & 0.0749 & 154.91 & 6.46 \\
+		4  & OpenVINO              & $\checkmark$ & 9.5  & 0.0749 & 222.11 & 4.50 \\
+		5  & TensorRT              & $\times$     & 0.0  & -      & -      & -    \\
+		6  & CoreML                & $\otimes$    & 4.8  & -      & -      & -    \\
+		7  & TensorFlow SavedModel & $\checkmark$ & 23.5 & 0.0749 & 359.22 & 2.78 \\
+		8  & TensorFlow GraphDef   & $\checkmark$ & 9.4  & 0.0749 & 357.28 & 2.80 \\
+		9  & TensorFlow Lite       & $\checkmark$ & 9.4  & 0.0749 & 139.26 & 7.18 \\
+		10 & TensorFlow Edge TPU   & $\otimes$    & 3.9  & -      & -      & -    \\
+		11 & TensorFlow.js         & $\otimes$    & 9.7  & -      & -      & -    \\
+		12 & PaddlePaddle          & $\checkmark$ & 18.7 & 0.0726 & 308.83 & 3.24 \\
+		13 & MNN                   & $\checkmark$ & 9.2  & 0.0749 & 155.57 & 6.43 \\
+		14 & NCNN                  & $\checkmark$ & 9.3  & 0.0726 & 201.40 & 4.97 \\
+		15 & IMX                   & $\times$     & 0.0  & -      & -      & -    \\
+		16 & RKNN                  & $\times$     & 0.0  & -      & -      & -    \\
+		17 & ExecuTorch            & $\times$     & 0.0  & -      & -      & -    \\
+		18 & Axelera               & $\times$     & 0.0  & -      & -      & -    \\
+		\bottomrule
+	\end{tabular}
+	
+	\vspace{2mm}
+	\footnotesize
+	\textbf{Benchmark legend:} 
+		$\checkmark$ Success \quad
+		$\otimes$ Export passed but validation failed \quad
+		$\times$ Export failed
+	\caption{Custom dataset trained YOLO26n benchmark}
+	
+	\label{table:results}
+\end{table}
+
+\begin{table}[h!]
+	\begin{tabular}{clccccc}
+		\toprule
+		\# & Format & Status & Size (MB) & mAP50-95(B) & Inference (ms/im) & FPS \\
+		\midrule
+		1  & PyTorch               & $\checkmark$ & 5.3  & 0.6601 & 182.42 & 5.48 \\
+		2  & TorchScript           & $\checkmark$ & 9.8  & 0.6881 & 331.02 & 3.02 \\
+		3  & ONNX                  & $\checkmark$ & 9.5  & 0.6881 & 154.72 & 6.46 \\
+		4  & OpenVINO              & $\checkmark$ & 9.6  & 0.6881 & 148.79 & 6.72 \\
+		5  & TensorRT              & $\times$     & 0.0  & -      & -      & -    \\
+		6  & CoreML                & $\otimes$    & 4.8  & -      & -      & -    \\
+		7  & TensorFlow SavedModel & $\checkmark$ & 24.6 & 0.6881 & 372.79 & 2.68 \\
+		8  & TensorFlow GraphDef   & $\checkmark$ & 9.5  & 0.6881 & 623.82 & 1.60 \\
+		9  & TensorFlow Lite       & $\checkmark$ & 9.9  & 0.6881 & 164.06 & 6.10 \\
+		10 & TensorFlow Edge TPU   & $\otimes$    & 3.9  & -      & -      & -    \\
+		11 & TensorFlow.js         & $\otimes$    & 10.0 & -      & -      & -    \\
+		12 & PaddlePaddle          & $\checkmark$ & 18.9 & 0.671  & 340.47 & 2.94 \\
+		13 & MNN                   & $\checkmark$ & 9.4  & 0.6881 & 186.97 & 5.35 \\
+		14 & NCNN                  & $\checkmark$ & 9.4  & 0.671  & 251.53 & 3.98 \\
+		15 & IMX                   & $\times$     & 0.0  & -      & -      & -    \\
+		16 & RKNN                  & $\times$     & 0.0  & -      & -      & -    \\
+		17 & ExecuTorch            & $\times$     & 0.0  & -      & -      & -    \\
+		18 & Axelera               & $\times$     & 0.0  & -      & -      & -    \\
+		\bottomrule
+	\end{tabular}
+
+	\vspace{2mm}
+	\footnotesize
+	\textbf{Benchmark legend:} $\checkmark$ Success \quad
+	$\otimes$ Export passed but validation failed \quad
+	$\times$ Export failed
+
+	\caption{YOLO26n model benchmark}
+\end{table}
+
+\clearpage
+
+\section{Appendix}\label{appendix:results}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig/training_results.png}
+    \caption{Training results}
+    \label{fig:training_results}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\textwidth]{fig/confusion_matrix.png}
+    \caption{Confusion matrix}
+    \label{fig:confusion_matrix}
+\end{figure}

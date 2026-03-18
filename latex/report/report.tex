@@ -2,68 +2,125 @@
 \usepackage{blindtext}
 \usepackage{titlesec}
 \usepackage{graphicx}
+\usepackage{booktabs}
 %\usepackage{underscore}
 \usepackage{float}
 \usepackage{tabularx}
 \usepackage{subfigure}
+\usepackage{subcaption}
 \usepackage{hyperref}
 \usepackage{pdfpages}
 \usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{dblfloatfix}
 
 \bibliographystyle{plain} 
 
-\title{%
-	Crowd Counting on Edge Devices \\
-	\large DA642E Project}
-\author{Adrian Jon Berlovan\and Athanasios Smilkos \and Vrysiida Charizi}
-\date{\today}
-
 \begin{document}
 
-\maketitle
-
-\clearpage
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{Crowd Counting on Edge Devices}
+            
+        \vspace{0.5cm}
+        \LARGE
+        DA642E Project
+            
+        \vspace{1.5cm}
+            
+        \textbf{Adrian Jon Berlovan} \\
+        \textbf{Athanasios Smilkos} \\
+				\textbf{Vrysiida Charizi} \\
+            
+        \vfill
+            
+           
+        \vspace{0.8cm}
+            
+        \includegraphics[width=0.4\textwidth]{fig/MAU_SV_hori_RGB.png}
+            
+        \Large
+        Computer Science: Internet of Things\\
+        Malmö University\\
+        Sweden\\
+        \today
+            
+    \end{center}
+\end{titlepage}
 
 \begin{abstract}
-In the current day and age, our right to privacy is being infringed more and more often. The goal of this project is to help people regain that right, especially in public settings. Often time cameras located in public areas need to send data back to the cloud in order to do inference or segmentation, not caring about privacy. In order to do image segmentation in a privacy-friendly way, we will be investigating running such machine learning (ML) algorithms directly on edge devices. This subject has been often tackled in literature, however usually using some form of hybrid edge, server and federated learning. 
+In the current day and age, our right to privacy is being infringed more and more often. The goal of this project is to help people regain that right, especially in public settings. Often times cameras located in public areas need to send data back to the cloud in order to do inference or segmentation, not caring about privacy. In order to do image segmentation in a privacy-friendly way, we will be investigating running such machine learning (ML) algorithms directly on edge devices. This subject has been often tackled in literature, however usually using some form of hybrid edge, server and federated learning. 
 
-We have combined several previously existing datasets into a new one, with a smaller selection of persons per image, which is more representative of small gatherings in public places where people might be easily identifiable. The YOLO26 pre-trained network has been re-trained on this dataset and employed quantization in order to be able to run the model faster on lower end hardware.
+We have combined several previously existing datasets into a new one, with a smaller selection of persons per image, which is more representative of small gatherings in public places where people might be easily identifiable. The YOLO26 pre-trained neural network has been re-trained on this dataset and we have employed quantization in order to be able to run the model faster on lower end hardware.
 \end{abstract}
 
 \section{Introduction} % Describe the problem you are working on, data source(s), and motivation
+
+Inspired by the many privacy violations we see and hear about almost daily, we have decided to investigate the feasibility of a segmentation model running on edge devices. Since one of the places that these violations happen  most often is public spaces, we have synthesized our own dataset by combining existing common, open-source datasets that are frequently featured in the literature. We have taken samples from \textit{COCOPersons (Common Objects In Context), CrowdHuman, KITTI}. The selected samples (that fit our criteria) were added to a dataset that was subsequently used to re-train a pre-trained YOLO\cite{YOLO} model, specifically version 26\cite{YOLO26}.
+
 \section{Related Work} % Discuss published works that relate to your project
 
-The machine learning model we are basing our project on is YOLO\cite{YOLO}, a pre-trained model, currently on version 26. It comes in various sizes, from n (the smallest, at 5 million parameters) all the way to x (the largerst, at 100 million parameters). Much other work has been done in this domain\cite{UAV}, however the models are usually not relased, and as such the claims are tougher to verify. Many of the related research does crowd counting without segmentation, which is good for very large gatherings but might prove less applicable to smaller groups of people.
+The model we are basing our project on (YOLO) comes in various sizes. Since our intention is deploying to edge devices, we have chosen the smallest model size, \textit{YOLO26n}, which has 2.4 milion parameters. However, the model exists in other variants as well, the largest being \textit{YOLO26x} at 55.7 milion parameters. Other work has been done in this domain\cite{santos2025wireless}\cite{oneshot}, however the models are usually not relased, and as such the results are tougher to replicate and verify. Many of the related research does crowd counting without segmentation\cite{UAV}\cite{RepSFNet}, which is good for very large gatherings but might prove less applicable to smaller groups of people.
+
+Many deep learning models are too computationally expensive for deployment on resource-limited hardware. Other research proposes\cite{crowd_counting_01} is a method based on feature fusion, Bayesian loss, and reported accuracy close to state-of-the-art methods. It also support real-time inference on edge devices.
+
+Other studies\cite{UAV} on crowd counting on resource-limited edge devices. They noted that a lot of existing methods focus on accuracy and overlook model size and cost. They propose a weighted knowledge distillation method to improve lightweight crowd counting models and evaluate it on six benchmark datasets.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{fig/datasets_before_combination.png}
+    \caption{Composition of different datasets before filtering.}
+    \label{fig:datasets_before_combination}
+\end{figure}
 
 \section{Method} % Describe the data you are working with for your project. The pre-processing steps, and AI method(s) employed to solve the problem/gain insights.
+
+The principal goal of this project centers on achieving high-accuracy image segmentation on resource-constrained hardware while maintaining data privacy. Our approach is divided into three phases: 
+\begin{itemize}
+\item Dataset synthesis - filtering and combining the datasets
+\item Model architecture selection - explore suitable segmentation models, preferably pre-trained
+\item Optimization for edge deployment - quantization
+\end{itemize}
+
+To better reflect the privacy challenges of small-scale public interactions, we developed a composite dataset by merging several existing open-source computer vision libraries, specifically COCO, KITTI and CrowdHuman datasets. Unlike standard datasets that often feature crowded urban scenes, our selection was filtered to prioritize images with a lower density of persons. This specific focus ensures the model is trained to recognize individuals in small gathering scenarios - for example, the scenario that we mentioned in our project proposal, as a main application area. In this case, the risk of identification is highest and the need for privacy-preserving segmentation is most acute.
+
+Unfortunately, many of the related research in running crowd counting and object segmentation on edge did not disclose their pre-trained models. For our model architecture, we decided to use the latest version of the YOLO (You Only Look Once) architecture. It is used specifically for real-time object detection and image segmentations in various deep learning applications\cite{YOLO26}. The network was then re-trained with our custom-curated dataset so the model can better learn what people look like in public spaces, with a specific focus on their shapes and sizes in small groups.
+
+Finally, in order to bring this model to lower-end hardware, we implemented quantization. This process involves converting the model’s weights and biases from high precision floating-point formats (e.g. FP32 - floating point on 32 bits) to lower-bit integers formats (e.g. FP16 - half-precision floats at 16 bits or even INT8), resulting in significantly reducing the computational overhead on the CPU/GPU on the edge device and also the model’s storage footprint.
+
+\begin{figure}[t]
+    \centering
+    \subfigure[Training]{\includegraphics[width=0.45\textwidth]{fig/combined_dataset_training.png}} 
+    \subfigure[Validation]{\includegraphics[width=0.45\textwidth]{fig/combined_dataset_validation.png}} 
+    \caption{Combined dataset for training and validation.}
+    \label{fig:combined_dataset}
+\end{figure}
+
 \section{Results} %  Describe the experiments that you performed to demonstrate that your approach solves the problem. Discuss the results and compare them with related works.
-We have tried on ESP32, however that did not work at all for reasons that we will describe below:
+The datasets we have selected contained a large amount of various images featuring diverse scenes. For the scope of our project, we are only interested images that contain between \textbf{5-15} persons. Looping through labels, everything that is not a label for a person was discarded. If the number of leftover labels was in the above range, the image was kept for the custom combined dataset. This has helped us reduce the size of the dataset a lot, by removing images that were not relevant. In Figure \ref{fig:datasets_before_combination}, we can observe the original dataset composition. Please note that the graph \textit{y axis} is in logarithmic scale.
+
+After the datasets have been processed and the relevant images extracted, we have compiled our dataset. The resulting distribution can be seen in \ref{fig:combined_dataset}. An interesting feature to be observed is the spike that occurs on 13 people per image. So far, science has been unable to explain it.
+
+With the reduced dataset size, the model was trained on a desktop computer with the following specifications: \textit{CPU - Ryzen 5 2600X, RAM - 16GB, GPU - 1660 Super 4GB}. The model was trained for 25 epoch, which resulted in metrics highlighted in Appendix \ref{appendix:results}. The original model as well as our re-trained model have been benchmarked using COCO8, a subset of COCO used for experimentation and testing. In it, our model has performed better across the board when compared to the original YOLO26n. We have achieved smaller model size, faster inference and more frames per second (FPS). The results can be observed in Appendix \ref{appendix:benchmark}.
+
+We have attempted to configure and run the model on an original ESP32 as well. However, given that it is very old and dated hardware, we have been unable to get it working. Some of the models that do run on that hardware are fairly dated themselves, and have already been thoroughly investigated.
+
 \section{Conclusions} % (and ideas for future work)
+
+
+-> quantize the model to int8
+
+-> deploy to ESP32
+With more work, we believe that the model can be reduced further and potentially even run on an inexpensive ESP32-based board.
+-> bigger training dataset with more epochs/training time
+Due to lack of resources, we were contrained at training for only 25 epochs. Despite this, the results we achieved are encouraging, and we are convinced that with further training better results are possible.
 
 \bibliography{bibliography}
 
+\appendix
+\input{appendix.tex}
+
 \end{document}
-
-% In the current day and age, we see the right to privacy being disregarded more and more often. In our project, we aim to help people regain that right. We will be investigating running crowd detection machine learning (ML) algorithms directly on edge devices. To the best of our knowledge, this subject has not been tackled that often in the literature, or has used some form of hybrid edge, server, and federated learning \cite{UAV}.
-
-%\section{Application area}
-
-% Our main concern relates to counting crowds in a privacy preserving way. As a project example, we can use Skånetrafiken ticket control. Instead of having controllers blindly board buses and bother people, we propose the use of an edge camera that can gather crowd statistics offline. By comparing that with the amount of scanned tickets, we can infer which lines are more prone to fraud. In this way, problematic lines can be isolated and investigated further by controllers.
-
-% To that end, we will compare the performance of different edge devices (Raspberry Pis, Laptops, and other similarly weak hardware) in running different state of the art architectures \cite{RepSFNet} \cite{santos2025wireless} \cite{oneshot}. In order to run the models, we will attempt to minimize the neural networks, by employing various techniques such as pruning, quantization or knowledge distillation.
-
-% \section{Data}
-
-% For our benchmarks, we will be evaluating and comparing different datasets, and finally choose one of them \cite{CrowdHuman} \cite{COCO} \cite{KITTI}. Since we are interested in a smaller crowd of people (between 5-20), we will have to analyze the dataset and extract only the samples that fit our criteria. With that, we will explore retraining the existing models on our new data.
-
-% \section{Results}
-
-% To evaluate whether the algorithm is applicable on the tested platform, we will be conducting a series of experiments:
-% \begin{itemize}
-% \item Timing - will it run in a reasonable amount of time?
-% \item Scale - can it fit on the device?
-% \item Accuracy - does it count the number of people correctly?
-% \end{itemize}
-
-% After running the tests and collecting the necessary results, we will compile it all in graph form, for easier visualization. 
-
