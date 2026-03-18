@@ -1,0 +1,75 @@
+
+Benchmarks complete for best.pt on ../custom.yaml at imgsz=640 (165.27s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
++--------------------------------------------------------------------------------------------------------+
+|      Format                  Status❔   Size (MB)   metrics/mAP50-95(B)   Inference time (ms/im)   FPS |
++========================================================================================================+
+| 1    PyTorch                 ❎         5.1         -                     -                        -   |
+| 2    TorchScript             ❎         9.6         -                     -                        -   |
+| 3    ONNX                    ❎         9.4         -                     -                        -   |
+| 4    OpenVINO                ❌         0.0         -                     -                        -   |
+| 5    TensorRT                ❌         0.0         -                     -                        -   |
+| 6    CoreML                  ❌         0.0         -                     -                        -   |
+| 7    TensorFlow SavedModel   ❌         0.0         -                     -                        -   |
+| 8    TensorFlow GraphDef     ❌         0.0         -                     -                        -   |
+| 9    TensorFlow Lite         ❌         0.0         -                     -                        -   |
+| 10   TensorFlow Edge TPU     ❌         0.0         -                     -                        -   |
+| 11   TensorFlow.js           ❌         0.0         -                     -                        -   |
+| 12   PaddlePaddle            ❌         0.0         -                     -                        -   |
+| 13   MNN                     ❌         0.0         -                     -                        -   |
+| 14   NCNN                    ❎         9.3         -                     -                        -   |
+| 15   IMX                     ❌         0.0         -                     -                        -   |
+| 16   RKNN                    ❌         0.0         -                     -                        -   |
+| 17   ExecuTorch              ❌         0.0         -                     -                        -   |
+| 18   Axelera                 ❌         0.0         -                     -                        -   |
++--------------------------------------------------------------------------------------------------------+
+
+Benchmarks complete for best.pt on custom.yaml at imgsz=640 (379.37s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
++----------------------------------------------------------------------------------------------------------+
+|      Format                  Status❔   Size (MB)   metrics/mAP50-95(B)   Inference time (ms/im)   FPS   |
++==========================================================================================================+
+| 1    PyTorch                 ❎         5.1         -                     -                        -     |
+| 2    TorchScript             ❎         9.7         -                     -                        -     |
+| 3    ONNX                    ✅         9.4         0.7157                69.12                    14.47 |
+| 4    OpenVINO                ❌         0.0         -                     -                        -     |
+| 5    TensorRT                ❌         0.0         -                     -                        -     |
+| 6    CoreML                  ❌         0.0         -                     -                        -     |
+| 7    TensorFlow SavedModel   ❌         0.0         -                     -                        -     |
+| 8    TensorFlow GraphDef     ❌         0.0         -                     -                        -     |
+| 9    TensorFlow Lite         ❌         0.0         -                     -                        -     |
+| 10   TensorFlow Edge TPU     ❌         0.0         -                     -                        -     |
+| 11   TensorFlow.js           ❌         0.0         -                     -                        -     |
+| 12   PaddlePaddle            ❌         0.0         -                     -                        -     |
+| 13   MNN                     ❌         0.0         -                     -                        -     |
+| 14   NCNN                    ✅         9.3         0.7169                78.18                    12.79 |
+| 15   IMX                     ❌         0.0         -                     -                        -     |
+| 16   RKNN                    ❌         0.0         -                     -                        -     |
+| 17   ExecuTorch              ❌         0.0         -                     -                        -     |
+| 18   Axelera                 ❌         0.0         -                     -                        -     |
++----------------------------------------------------------------------------------------------------------+
+
+Benchmarks complete for best.pt on custom.yaml at imgsz=640 (804.30s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
++-----------------------------------------------------------------------------------------------------------+
+|      Format                  Status❔   Size (MB)   metrics/mAP50-95(B)   Inference time (ms/im)   FPS    |
++===========================================================================================================+
+| 1    PyTorch                 ✅         5.1         0.7159                11.12                    89.91  |
+| 2    TorchScript             ✅         9.6         0.7157                6.24                     160.21 |
+| 3    ONNX                    ✅         9.4         0.7157                70.6                     14.16  |
+| 4    OpenVINO                ❌         0.0         -                     -                        -      |
+| 5    TensorRT                ❌         0.0         -                     -                        -      |
+| 6    CoreML                  ❌         0.0         -                     -                        -      |
+| 7    TensorFlow SavedModel   ❌         0.0         -                     -                        -      |
+| 8    TensorFlow GraphDef     ❌         0.0         -                     -                        -      |
+| 9    TensorFlow Lite         ❌         0.0         -                     -                        -      |
+| 10   TensorFlow Edge TPU     ❌         0.0         -                     -                        -      |
+| 11   TensorFlow.js           ❌         0.0         -                     -                        -      |
+| 12   PaddlePaddle            ❌         0.0         -                     -                        -      |
+| 13   MNN                     ❌         0.0         -                     -                        -      |
+| 14   NCNN                    ✅         9.3         0.7169                76.45                    13.08  |
+| 15   IMX                     ❌         0.0         -                     -                        -      |
+| 16   RKNN                    ❌         0.0         -                     -                        -      |
+| 17   ExecuTorch              ❌         0.0         -                     -                        -      |
+| 18   Axelera                 ❌         0.0         -                     -                        -      |
++-----------------------------------------------------------------------------------------------------------+

@@ -18,3 +18,4 @@ We want to test it on our own data, so we will re-train it slightly with specifi
 2. Quantization how-to (using some Microsoft bullshit, onnx): https://medium.com/@sulavstha007/quantizing-yolo-v8-models-34c39a2c10e2
 3. Visualizing the neural network: https://netron.app/
 4. Training parameters: https://docs.ultralytics.com/modes/train/
+5. NCNN, inference for low-end devices: https://docs.ultralytics.com/integrations/ncnn/
