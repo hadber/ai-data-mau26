@@ -104,7 +104,7 @@ The datasets we have selected contained a large amount of various images featuri
 
 After the datasets have been processed and the relevant images extracted, we have compiled our dataset. The resulting distribution can be seen in \ref{fig:combined_dataset}. An interesting feature to be observed is the spike that occurs on 13 people per image. So far, science has been unable to explain it.
 
-With the reduced dataset size, the model was trained on a desktop computer with the following specifications: \textit{Ryzen 5 2600X CPU, 16GB RAM, Nvidia 1660 6GB GPU}. The model was trained for 25 epochs, with the results available in Appendix \ref{appendix:results}. The original model as well as our re-trained model have been benchmarked using COCO8, a subset of COCO used for experimentation and testing. In it, our model has performed better across the board when compared to the original YOLO26n. We have achieved smaller model size, faster inference and more frames per second (FPS). The results can be observed in Appendix \ref{appendix:benchmark}.
+With the reduced dataset size, the model was trained on a desktop computer with the following specifications: \textit{Ryzen 5 2600X CPU, 16GB RAM, Nvidia 1660 6GB GPU}. The model was trained for 25 epochs, with the results available in Appendix \ref{appendix:results}. The original model as well as our re-trained model have been benchmarked using COCO8, a subset of COCO used for experimentation and testing. In it, our model has performed better across the board when compared to the original YOLO26n. We have achieved smaller model size, faster inference and more frames per second (FPS). The only worse-performing metric is accuracy, due to our model only being trained on one label (person) versus the 80 \textit{YOLO} is capable of. The results can be observed in Appendix \ref{appendix:benchmark}.
 
 Aditionally, we have quantized the model and ran it on various hardware with limited speeds. For benchmarking, we used 23 never-seen-before (by the model) images, and ran inference on them 5 times. The results reported in \ref{fig:avgs} represent the average inference speed across 115 inferences.
 The results are reassuring - even an extremely cheap and limited hardware such as \textit{Raspberry Pi Zero 2W} is able to run our model at reasonable speeds. If sporadic snapshots are enough, this device is capable of running such a workload.
@@ -121,12 +121,11 @@ The results are reassuring - even an extremely cheap and limited hardware such a
     \hspace{4em}\textbf{laptop:} \quad AMD Ryzen 7 7730U 2.0 GHz, iGPU Radeon Vega 8
     
     \centering
-    \caption{Composition of different datasets before filtering.}
+    \caption{Average inference time in miliseconds.}
     \label{fig:avgs}
 \end{figure}
 
 We have attempted to configure and run the model on an original ESP32 as well. However, given that it is very old and dated hardware, we have been unable to get it working. Some of the models that do run on that hardware are fairly dated themselves, and have already been thoroughly investigated.
-
 
 \section{Conclusions} % (and ideas for future work)
 

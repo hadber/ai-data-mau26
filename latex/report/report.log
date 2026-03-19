@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2026.1.16)  19 MAR 2026 21:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2026.1.16)  19 MAR 2026 22:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -543,12 +543,12 @@ e 97.
 
 [2 <./fig/combined_dataset_training.png> <./fig/combined_dataset_validation.png
 >]
-<fig/hardware_benchmark_pretty.png, id=93, 443.0151pt x 298.4751pt>
+<fig/hardware_benchmark_pretty.png, id=93, 443.0151pt x 312.2064pt>
 File: fig/hardware_benchmark_pretty.png Graphic file (type png)
 <use fig/hardware_benchmark_pretty.png>
 Package pdftex.def Info: fig/hardware_benchmark_pretty.png  used on input line 
 114.
-(pdftex.def)             Requested size: 230.44937pt x 155.26259pt.
+(pdftex.def)             Requested size: 230.44937pt x 162.40543pt.
 
 
 (./report.bbl
@@ -604,11 +604,11 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 Here is how much of TeX's memory you used:
  12886 strings out of 475171
  204702 string characters out of 5767095
- 621577 words of memory out of 5000000
+ 621564 words of memory out of 5000000
  35666 multiletter control sequences out of 15000+600000
  567060 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,11n,79p,830b,567s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,868b,565s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/snow/.texlive/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></
 usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/t
@@ -621,7 +621,7 @@ amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/sh
 are/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on report.pdf (7 pages, 631423 bytes).
+Output written on report.pdf (7 pages, 632682 bytes).
 PDF statistics:
  195 PDF objects out of 1000 (max. 8388607)
  143 compressed objects within 2 object streams
