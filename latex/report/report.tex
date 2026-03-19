@@ -54,20 +54,20 @@
 \begin{abstract}
 In the current day and age, our right to privacy is being infringed more and more often. The goal of this project is to help people regain that right, especially in public settings. Often times cameras located in public areas need to send data back to the cloud in order to do inference or segmentation, not caring about privacy. In order to do image segmentation in a privacy-friendly way, we will be investigating running such machine learning (ML) algorithms directly on edge devices. This subject has been often tackled in literature, however usually using some form of hybrid edge, server and federated learning. 
 
-We have combined several previously existing datasets into a new one, with a smaller selection of persons per image, which is more representative of small gatherings in public places where people might be easily identifiable. The YOLO26 pre-trained neural network has been re-trained on this dataset and we have employed quantization in order to be able to run the model faster on lower end hardware.
+We have combined several previously existing datasets into a new one, with a smaller selection of persons per image, which is more representative of small gatherings in public places where people might be easily identifiable. The \textit{YOLO26} (You Only Look Once, version 26) pre-trained neural network has been re-trained on this dataset and we have employed quantization in order to be able to run the model faster on lower end hardware.
 \end{abstract}
 
 \section{Introduction} % Describe the problem you are working on, data source(s), and motivation
 
-Inspired by the many privacy violations we see and hear about almost daily, we have decided to investigate the feasibility of a segmentation model running on edge devices. Since one of the places that these violations happen  most often is public spaces, we have synthesized our own dataset by combining existing common, open-source datasets that are frequently featured in the literature. We have taken samples from \textit{COCOPersons (Common Objects In Context), CrowdHuman, KITTI}. The selected samples (that fit our criteria) were added to a dataset that was subsequently used to re-train a pre-trained YOLO\cite{YOLO} model, specifically version 26\cite{YOLO26}.
+Inspired by the many privacy violations we see and hear about almost daily, we have decided to investigate the feasibility of a segmentation model running on edge devices. Since one of the places that these violations happen  most often is public spaces, we have synthesized our own dataset by combining existing, open-source datasets that are frequently featured in the literature. We have taken samples from \textit{COCOPersons (Common Objects In Context), CrowdHuman} and \textit{KITTI}. The selected samples (that fit our criteria) were added to a dataset that was subsequently used to re-train a pre-trained YOLO\cite{YOLO} model, specifically version 26\cite{YOLO26}.
 
 \section{Related Work} % Discuss published works that relate to your project
 
-The model we are basing our project on (YOLO) comes in various sizes. Since our intention is deploying to edge devices, we have chosen the smallest model size, \textit{YOLO26n}, which has 2.4 milion parameters. However, the model exists in other variants as well, the largest being \textit{YOLO26x} at 55.7 milion parameters. Other work has been done in this domain\cite{santos2025wireless}\cite{oneshot}, however the models are usually not relased, and as such the results are tougher to replicate and verify. Many of the related research does crowd counting without segmentation\cite{UAV}\cite{RepSFNet}, which is good for very large gatherings but might prove less applicable to smaller groups of people.
+The model we are basing our project on (\textit{YOLO}) comes in various sizes. Since our intention is deploying to edge devices, we have chosen the smallest model size, \textit{YOLO26n}, which has 2.4 milion parameters. However, the model is available in other variants as well, the largest being \textit{YOLO26x} at 55.7 milion parameters. Other work has been done in this domain\cite{santos2025wireless}\cite{oneshot}, however the models are usually not relased, and as such the results are tougher to replicate and verify. Many of the related research does crowd counting without segmentation\cite{UAV}\cite{RepSFNet}, which is good for very large gatherings but might prove less applicable to smaller groups of people.
 
-Many deep learning models are too computationally expensive for deployment on resource-limited hardware. Other research proposes\cite{crowd_counting_01} is a method based on feature fusion, Bayesian loss, and reported accuracy close to state-of-the-art methods. It also support real-time inference on edge devices.
+Many deep learning models are too computationally expensive for deployment on resource-limited hardware. Other research proposes\cite{crowd_counting_01} a method based on feature fusion, Bayesian loss, and reported accuracy close to state-of-the-art methods. It also support real-time inference on edge devices.
 
-Other studies\cite{UAV} on crowd counting on resource-limited edge devices. They noted that a lot of existing methods focus on accuracy and overlook model size and cost. They propose a weighted knowledge distillation method to improve lightweight crowd counting models and evaluate it on six benchmark datasets.
+Other studies\cite{UAV} have investigated crowd counting on resource-limited edge devices. They noted that a lot of existing methods focus on accuracy and overlook model size and cost. They propose a weighted knowledge distillation method to improve lightweight crowd counting models and evaluate it on five benchmark datasets.
 
 \begin{figure}[h]
     \centering
@@ -85,11 +85,11 @@ The principal goal of this project centers on achieving high-accuracy image segm
 \item Optimization for edge deployment - quantization
 \end{itemize}
 
-To better reflect the privacy challenges of small-scale public interactions, we developed a composite dataset by merging several existing open-source computer vision libraries, specifically COCO, KITTI and CrowdHuman datasets. Unlike standard datasets that often feature crowded urban scenes, our selection was filtered to prioritize images with a lower density of persons. This specific focus ensures the model is trained to recognize individuals in small gathering scenarios - for example, the scenario that we mentioned in our project proposal, as a main application area. In this case, the risk of identification is highest and the need for privacy-preserving segmentation is most acute.
+To better reflect the privacy challenges of small-scale public interactions, we developed a composite dataset by merging several existing open-source computer vision libraries, specifically COCO\cite{COCO}, KITTI\cite{KITTI} and CrowdHuman\cite{CrowdHuman} datasets. Unlike standard datasets that often feature crowded urban scenes, our selection was filtered to prioritize images with a lower density of persons. This specific focus ensures the model is trained to recognize individuals in small gathering scenarios - for example, the scenario that we mentioned in our project proposal (a monitoring camera in a bus, for statistics on tickets used), as a main application area. In this case, the risk of identification is highest and the need for privacy-preserving segmentation is most acute.
 
-Unfortunately, many of the related research in running crowd counting and object segmentation on edge did not disclose their pre-trained models. For our model architecture, we decided to use the latest version of the YOLO (You Only Look Once) architecture. It is used specifically for real-time object detection and image segmentations in various deep learning applications\cite{YOLO26}. The network was then re-trained with our custom-curated dataset so the model can better learn what people look like in public spaces, with a specific focus on their shapes and sizes in small groups.
+Unfortunately, many of the related research in running crowd counting and object segmentation on edge did not disclose their pre-trained models. For our model architecture, we decided to use the latest version of the \textit{YOLO} architecture. It is used specifically for real-time object detection and image segmentations in various deep learning applications\cite{YOLO26}. The network was then re-trained with our custom-curated dataset so that the model can better learn what people look like in public spaces, with a specific focus on their shapes and sizes in small groups.
 
-Finally, in order to bring this model to lower-end hardware, we implemented quantization. This process involves converting the model’s weights and biases from high precision floating-point formats (e.g. FP32 - floating point on 32 bits) to lower-bit integers formats (e.g. FP16 - half-precision floats at 16 bits or even INT8), resulting in significantly reducing the computational overhead on the CPU/GPU on the edge device and also the model’s storage footprint.
+Finally, in order to bring this model to lower-end hardware, we implemented quantization. This process involves converting the model’s weights and biases from high precision floating-point formats (e.g. FP32 - floating point on 32 bits) to lower-bit formats (e.g. FP16 - half-precision floats at 16 bits or even INT8). This results in significantly reduced computational overhead on the CPU/GPU of the edge device and also the model’s storage footprint.
 
 \begin{figure}[t]
     \centering
@@ -100,23 +100,44 @@ Finally, in order to bring this model to lower-end hardware, we implemented quan
 \end{figure}
 
 \section{Results} %  Describe the experiments that you performed to demonstrate that your approach solves the problem. Discuss the results and compare them with related works.
-The datasets we have selected contained a large amount of various images featuring diverse scenes. For the scope of our project, we are only interested images that contain between \textbf{5-15} persons. Looping through labels, everything that is not a label for a person was discarded. If the number of leftover labels was in the above range, the image was kept for the custom combined dataset. This has helped us reduce the size of the dataset a lot, by removing images that were not relevant. In Figure \ref{fig:datasets_before_combination}, we can observe the original dataset composition. Please note that the graph \textit{y axis} is in logarithmic scale.
+The datasets we have selected contained a large amount of various images featuring diverse scenes. For the scope of our project, we are only interested in images that contain between \textbf{5-15} persons, as this is a good representation of small groups of people in public spaces. Looping through labels, everything that is not a label for a person was discarded. If the number of leftover labels was in the above range, the image was kept for the custom combined dataset. This has helped us reduce the size of the dataset a lot, by filtering out images that were not relevant. In Figure \ref{fig:datasets_before_combination}, we can observe the original dataset composition. Please note that the graph \textit{y axis} is in logarithmic scale, as some datasets had a lot more data.
 
 After the datasets have been processed and the relevant images extracted, we have compiled our dataset. The resulting distribution can be seen in \ref{fig:combined_dataset}. An interesting feature to be observed is the spike that occurs on 13 people per image. So far, science has been unable to explain it.
 
-With the reduced dataset size, the model was trained on a desktop computer with the following specifications: \textit{CPU - Ryzen 5 2600X, RAM - 16GB, GPU - 1660 Super 4GB}. The model was trained for 25 epoch, which resulted in metrics highlighted in Appendix \ref{appendix:results}. The original model as well as our re-trained model have been benchmarked using COCO8, a subset of COCO used for experimentation and testing. In it, our model has performed better across the board when compared to the original YOLO26n. We have achieved smaller model size, faster inference and more frames per second (FPS). The results can be observed in Appendix \ref{appendix:benchmark}.
+With the reduced dataset size, the model was trained on a desktop computer with the following specifications: \textit{Ryzen 5 2600X CPU, 16GB RAM, Nvidia 1660 6GB GPU}. The model was trained for 25 epochs, with the results available in Appendix \ref{appendix:results}. The original model as well as our re-trained model have been benchmarked using COCO8, a subset of COCO used for experimentation and testing. In it, our model has performed better across the board when compared to the original YOLO26n. We have achieved smaller model size, faster inference and more frames per second (FPS). The results can be observed in Appendix \ref{appendix:benchmark}.
+
+Aditionally, we have quantized the model and ran it on various hardware with limited speeds. For benchmarking, we used 23 never-seen-before (by the model) images, and ran inference on them 5 times. The results reported in \ref{fig:avgs} represent the average inference speed across 115 inferences.
+The results are reassuring - even an extremely cheap and limited hardware such as \textit{Raspberry Pi Zero 2W} is able to run our model at reasonable speeds. If sporadic snapshots are enough, this device is capable of running such a workload.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{fig/hardware_benchmark_pretty.png}
+    
+    \raggedright	
+		\tiny
+		\hspace{4em}\textbf{pizero:} \quad ARM Cortex-A53 1GHz\\
+		\hspace{4em}\textbf{laptop weak:} \quad  Intel Core i5 6200U 2.3 GHz, iGPU Intel HD 520\\
+    \hspace{4em}\textbf{computor:} \quad AMD Ryzen 5 2600X 3.6 GHz\\
+    \hspace{4em}\textbf{laptop:} \quad AMD Ryzen 7 7730U 2.0 GHz, iGPU Radeon Vega 8
+    
+    \centering
+    \caption{Composition of different datasets before filtering.}
+    \label{fig:avgs}
+\end{figure}
 
 We have attempted to configure and run the model on an original ESP32 as well. However, given that it is very old and dated hardware, we have been unable to get it working. Some of the models that do run on that hardware are fairly dated themselves, and have already been thoroughly investigated.
 
+
 \section{Conclusions} % (and ideas for future work)
 
+In conclusion, this project successfully demonstrated the feasibility of deploying a privacy-preserving image segmentation model on resource-constrained hardware. By synthesizing a custom dataset which was filtered specifically for small gathering scenarios (5-15 people). We optimized the YOLO26n architecture to perform effectively in scenarios where individual privacy is most at risk. Through the application of quantization, we reduced the model’s memory footprint and increased inference speed, outperforming the original YOLO26n benchmarks. 
 
--> quantize the model to int8
+While the results we achieved after only 25 training epochs looked encouraging, we hope that in the future we will be able to increase it to at least 100 epochs, which we believe will lead to further improvements. For future work, and after thoroughly researching the ESP32-based board with its significant limitations, we believe that the model can be reduced further and potentially even be able to run on such boards, with the use of INT8 quantization.
+ 
+Given the promising results we have achieved, the model has a strong potential for further improvement. With little work, an open source model such as YOLO26 can be re-trained and quantized to run reliably on inexpensive and slow devices, eliminating the need for cloud processing. Ultimately, this work proves that high-accuracy segmentation does not have to come at the cost of data privacy or inexpensive cloud infrastructure.
 
--> deploy to ESP32
-With more work, we believe that the model can be reduced further and potentially even run on an inexpensive ESP32-based board.
--> bigger training dataset with more epochs/training time
-Due to lack of resources, we were contrained at training for only 25 epochs. Despite this, the results we achieved are encouraging, and we are convinced that with further training better results are possible.
+% Despite this, the results we achieved are encouraging, and we are convinced that with further work, better results are possible.
+% For future work we would focus on using INT8 quantization on the model deploy it on ESP32 boards. Additionally, we will try to train the model on a larger dataset with more epochs as we believe it will improve performance, since our current training was limited to only 25 epochs. 
 
 \bibliography{bibliography}
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{RepSFNet}
 Mas~Nurul Achmadiah, Chi-Chia Sun, Wen-Kai Kuo, and Jun-Wei Hsieh.
@@ -12,6 +12,11 @@ Jiwei Chen, Qi~Wang, Junyu Gao, Jing Zhang, Dingyi Li, and Jing-Jia Luo.
 \newblock One-shot crowd counting with density guidance for scene adaptaion,
   2026.
 
+\bibitem{COCO}
+COCO.
+\newblock Common objects in context, 2026.
+\newblock Accessed: Feb. 15, 2026.
+
 \bibitem{crowd_counting_01}
 Zuo Huang, Richard Sinnott, and Qiuhong Ke.
 \newblock Crowd counting using deep learning in edge devices.
@@ -24,6 +29,11 @@ Muhammad~Asif Khan, Hamid Menouar, Ridha Hamila, and Adnan Abu-Dayya.
 \newblock Crowd counting at the edge using weighted knowledge distillation.
 \newblock {\em Scientific Reports}, 15(1):11932, Apr 2025.
 
+\bibitem{KITTI}
+KITTI.
+\newblock Kitti vision benchmark suite, 2026.
+\newblock Accessed: Feb. 15, 2026.
+
 \bibitem{YOLO}
 Joseph Redmon, Santosh~Kumar Divvala, Ross~B. Girshick, and Ali Farhadi.
 \newblock You only look once: Unified, real-time object detection.
@@ -35,9 +45,15 @@ Tom{\'a}s Mestre~dos Santos, Rui~Neto Marinheiro, and Fernando Brito~e Abreu.
 \newblock In {\em Smart Life and Smart Life Engineering: Current State and
   Future Vision}, pages 237--258. Springer, 2025.
 
+\bibitem{CrowdHuman}
+Shuai Shao, Zijian Zhao, Boxun Li, Tete Xiao, Gang Yu, Xiangyu Zhang, and Jian
+  Sun.
+\newblock Crowdhuman: {A} benchmark for detecting human in a crowd.
+\newblock {\em CoRR}, abs/1805.00123, 2018.
+
 \bibitem{YOLO26}
 {Ultralytics}.
-\newblock Yolo26, 2026.
-\newblock Accessed: Mar. 18, 2026.
+\newblock Yolo26, Accessed: Mar. 18, 2026.
+\newblock https://docs.ultralytics.com/models/yolo26/.
 
 \end{thebibliography}
