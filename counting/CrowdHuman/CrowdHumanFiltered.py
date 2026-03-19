@@ -1,3 +1,4 @@
+#Some AI was used for debugging and understanding on how to do a few parts of the code that did not know how to do at first.
 
 !pip install ultralytics
 
